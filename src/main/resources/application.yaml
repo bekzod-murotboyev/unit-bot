@@ -1,0 +1,41 @@
+server:
+  port: 2000
+
+spring:
+  datasource:
+    url: #{DB_URL}#
+    username: #{DB_USERNAME}#
+    password: #{DB_PASSWORD}#
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      repositories:
+        enabled: false
+
+bot:
+  domain: #{BOT_DOMAIN}#
+  token: #{BOT_TOKEN}#
+  i18:
+    enabled: true
+    key:
+      back-button: back-button
+      contact-button: phone-button
+      location-button: location-button 
+      back-button-prefix: BACK_
+
+
+spotify:
+  client-id: #{SPOTIFY_CLIENT_ID}#
+  client-secret: #{SPOTIFY_CLIENT_SECRET}#
+
+
+
+
+
+
