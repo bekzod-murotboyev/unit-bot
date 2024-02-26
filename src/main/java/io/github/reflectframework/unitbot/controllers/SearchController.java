@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 import static io.github.reflectframework.unitbot.utils.Locale.SEARCH_MODE;
 
-@BotController(order = 2)
+@BotController
 @RequiredArgsConstructor
 public class SearchController {
 

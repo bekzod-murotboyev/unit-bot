@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import static io.github.reflectframework.unitbot.utils.Locale.UNKNOWN_OPTION;
 
-@BotController
+@BotController(order = Integer.MAX_VALUE)
 @RequiredArgsConstructor
 public class ExceptionController {
 

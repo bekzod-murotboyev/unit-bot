@@ -3,7 +3,6 @@ package io.github.reflectframework.unitbot.services;
 import io.github.reflectframework.reflecttelegrambot.entities.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.entities.user.TelegramUserDetails;
 import io.github.reflectframework.reflecttelegrambot.services.user.TelegramUserDetailsService;
-import io.github.reflectframework.reflecttelegrambot.services.webhook.WebhookService;
 import io.github.reflectframework.unitbot.entities.UserEntity;
 import io.github.reflectframework.unitbot.repositories.UserRepository;
 import io.github.reflectframework.unitbot.utils.Language;

@@ -11,7 +11,7 @@ import io.github.reflectframework.unitbot.utils.Constant;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
 
-@BotController(order = 1)
+@BotController
 @RequiredArgsConstructor
 public class RegisterController {
 
