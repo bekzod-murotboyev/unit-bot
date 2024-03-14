@@ -1,6 +1,6 @@
 package io.github.reflectframework.unitbot.services.bot;
 
-import io.github.reflectframework.reflecttelegrambot.components.sender.base.Sender;
+import io.github.reflectframework.reflecttelegrambot.components.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entities.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
 import io.github.reflectframework.unitbot.services.SpotifyService;
