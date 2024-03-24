@@ -1,6 +1,5 @@
 package io.github.reflectframework.unitbot.dto.spotify.auth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import feign.form.FormProperty;
 import lombok.Data;
 

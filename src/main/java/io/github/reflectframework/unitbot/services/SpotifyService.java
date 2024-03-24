@@ -1,11 +1,11 @@
 package io.github.reflectframework.unitbot.services;
 
 import io.github.reflectframework.unitbot.dto.spotify.SpotifyAuthDTO;
+import io.github.reflectframework.unitbot.dto.spotify.auth.SpotifyAuthRequestBody;
 import io.github.reflectframework.unitbot.dto.spotify.search.ItemsItem;
+import io.github.reflectframework.unitbot.dto.spotify.search.SpotifySearchResponseBody;
 import io.github.reflectframework.unitbot.feignclients.SpotifyApiFeign;
 import io.github.reflectframework.unitbot.feignclients.SpotifyAuthFeign;
-import io.github.reflectframework.unitbot.dto.spotify.auth.SpotifyAuthRequestBody;
-import io.github.reflectframework.unitbot.dto.spotify.search.SpotifySearchResponseBody;
 import io.github.reflectframework.unitbot.utils.SpotifySearchType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

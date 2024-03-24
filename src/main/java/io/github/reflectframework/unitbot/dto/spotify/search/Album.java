@@ -1,7 +1,8 @@
 package io.github.reflectframework.unitbot.dto.spotify.search;
 
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class Album{

@@ -14,6 +14,7 @@ import static io.github.reflectframework.unitbot.utils.Locale.UNKNOWN_OPTION;
 public class ExceptionController {
 
     private final Sender sender;
+
     @TextMapping(regexp = "[\\w.-]*")
     public UserState exceptionHandler(HashedUser user) {
         sender.sendMessage(user, UNKNOWN_OPTION);
