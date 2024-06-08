@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class RegisterController {
 
     private final RegisterService registerService;
-
     @TextMapping(regexp = "/start", states = {State.Fields.INIT})
     public UserState showFirstStartMenu(HashedUser user) {
         return registerService.showFirstStartMenu(user);
