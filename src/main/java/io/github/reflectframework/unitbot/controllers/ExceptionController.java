@@ -2,7 +2,7 @@ package io.github.reflectframework.unitbot.controllers;
 
 
 import io.github.reflectframework.reflecttelegrambot.annotation.BotController;
-import io.github.reflectframework.reflecttelegrambot.annotation.mappings.TextMapping;
+import io.github.reflectframework.reflecttelegrambot.annotation.mapping.TextMapping;
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
