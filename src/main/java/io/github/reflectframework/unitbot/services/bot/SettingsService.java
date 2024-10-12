@@ -1,10 +1,10 @@
 package io.github.reflectframework.unitbot.services.bot;
 
-import io.github.reflectframework.reflecttelegrambot.components.sender.Sender;
-import io.github.reflectframework.reflecttelegrambot.entities.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.utils.enums.KeyboardType;
-import io.github.reflectframework.reflecttelegrambot.utils.extensions.Extension;
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
+import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
+import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
+import io.github.reflectframework.reflecttelegrambot.util.enums.KeyboardType;
+import io.github.reflectframework.reflecttelegrambot.util.extension.Extension;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;

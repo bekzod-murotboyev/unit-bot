@@ -1,8 +1,8 @@
 package io.github.reflectframework.unitbot.entities;
 
-import io.github.reflectframework.reflecttelegrambot.entities.user.TelegramUserDetails;
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserLanguage;
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
+import io.github.reflectframework.reflecttelegrambot.entity.user.TelegramUserDetails;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserLanguage;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
 import jakarta.annotation.Nonnull;

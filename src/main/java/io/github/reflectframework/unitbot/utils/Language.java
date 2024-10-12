@@ -1,6 +1,6 @@
 package io.github.reflectframework.unitbot.utils;
 
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserLanguage;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserLanguage;
 
 public enum Language implements UserLanguage {
     EN("en"),

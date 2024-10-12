@@ -1,8 +1,8 @@
 package io.github.reflectframework.unitbot.services.bot;
 
-import io.github.reflectframework.reflecttelegrambot.components.sender.Sender;
-import io.github.reflectframework.reflecttelegrambot.entities.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
+import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
+import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.SpotifyService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;

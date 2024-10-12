@@ -1,10 +1,10 @@
 package io.github.reflectframework.unitbot.controllers;
 
-import io.github.reflectframework.reflecttelegrambot.annotations.BotController;
-import io.github.reflectframework.reflecttelegrambot.annotations.mappings.CallbackQueryMapping;
-import io.github.reflectframework.reflecttelegrambot.annotations.mappings.TextMapping;
-import io.github.reflectframework.reflecttelegrambot.entities.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
+import io.github.reflectframework.reflecttelegrambot.annotation.BotController;
+import io.github.reflectframework.reflecttelegrambot.annotation.mappings.CallbackQueryMapping;
+import io.github.reflectframework.reflecttelegrambot.annotation.mappings.TextMapping;
+import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.bot.SearchService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;

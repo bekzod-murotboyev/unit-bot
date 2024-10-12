@@ -1,6 +1,6 @@
 package io.github.reflectframework.unitbot.utils;
 
-import io.github.reflectframework.reflecttelegrambot.utils.markers.UserState;
+import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import lombok.experimental.FieldNameConstants;
 
 @FieldNameConstants(onlyExplicitlyIncluded = true)
