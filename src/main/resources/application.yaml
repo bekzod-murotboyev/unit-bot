@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: #{DB_URL}#
-    username: #{DB_USERNAME}#
-    password: #{DB_PASSWORD}#
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,14 +19,19 @@ spring:
         enabled: false
 
 bot:
-  domain: #{BOT_DOMAIN}#
-  token: #{BOT_TOKEN}#
+  mode: development
+  token: ${BOT_TOKEN}
+  domain: ${BOT_DOMAIN:}
+  username: ${BOT_USERNAME:}
+  properties:
+    catch-mapper-exception: true
+    show-unmapped-request-log: true
   i18:
     enabled: true
     key:
       back-button: back-button
       contact-button: phone-button
-      location-button: location-button 
+      location-button: location-button
       back-button-prefix: BACK_
 
 
