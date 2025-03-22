@@ -20,7 +20,7 @@ spring:
 
 bot:
   mode: development
-  token: ${BOT_TOKEN}
+  token: ${BOT_TOKEN:}
   domain: ${BOT_DOMAIN:}
   username: ${BOT_USERNAME:}
   properties:
