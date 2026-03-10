@@ -21,7 +21,7 @@ public class BeanConfiguration {
             String clientSecret
     ) {
         SpotifyAuthResponseBody response = feign.authenticate(new SpotifyAuthRequestBody(clientId, clientSecret));
-        return new SpotifyAuthDTO(response.getTokenType()+" "+response.getAccessToken(), System.currentTimeMillis() + response.getExpiresIn() * 1000);
+        return new SpotifyAuthDTO(response.getTokenType() + " " + response.getAccessToken(), System.currentTimeMillis() + response.getExpiresIn() * 1000);
     }
 
 

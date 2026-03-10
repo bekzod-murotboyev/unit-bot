@@ -1,7 +1,7 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.5.6"
-    id("io.spring.dependency-management") version "1.1.4"
+    id("org.springframework.boot") version "4.0.3"
+    id("io.spring.dependency-management") version "1.1.7"
     kotlin("jvm")
 }
 
@@ -21,14 +21,14 @@ repositories {
     mavenCentral()
 }
 
-extra["springCloudVersion"] = "2025.0.0"
+extra["springCloudVersion"] = "2025.1.1"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("io.github.reflectframework:reflect-telegram-bot:1.5.5")
+    implementation("io.github.reflectframework:reflect-telegram-bot:1.5.6")
 
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
