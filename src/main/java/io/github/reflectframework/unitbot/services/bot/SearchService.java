@@ -6,6 +6,7 @@ import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.SpotifyService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 
 import static io.github.reflectframework.unitbot.utils.Locale.MP3_NOT_FOUND;
@@ -13,6 +14,7 @@ import static io.github.reflectframework.unitbot.utils.Locale.SEARCH_MODE_TITLE;
 
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class SearchService {
 
     private final Sender sender;

@@ -25,6 +25,7 @@ public class UserEntity implements TelegramUserDetails {
 
     private String phoneNumber;
 
+    @Column(name = "chat_id")
     private long chatId;
 
     @Enumerated(EnumType.STRING)

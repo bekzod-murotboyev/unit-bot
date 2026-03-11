@@ -10,11 +10,13 @@ import io.github.reflectframework.unitbot.utils.State;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class UserService implements TelegramUserDetailsService {
 
     private final UserRepository userRepository;

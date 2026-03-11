@@ -7,11 +7,13 @@ import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import static io.github.reflectframework.unitbot.utils.Locale.UNKNOWN_OPTION;
 
 @BotController(order = Integer.MAX_VALUE)
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class ExceptionController {
 
     private final Sender sender;

@@ -3,13 +3,14 @@ package io.github.reflectframework.unitbot.services.bot;
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.util.enums.KeyboardType;
-import io.github.reflectframework.reflecttelegrambot.util.extension.Extension;
+import io.github.reflectframework.reflecttelegrambot.util.i18n.I18nUtils;
 import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import static io.github.reflectframework.unitbot.utils.Locale.*;
 
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class SettingsService {
     private final UserService userService;
 
@@ -70,7 +72,7 @@ public class SettingsService {
     }
 
     public UserState backToSettingsMenuFromChangePhone(HashedUser user, String text) {
-        if (text.equals(Extension.tr(messageSource, backButton, user.getLanguage()))) {
+        if (text.equals(I18nUtils.tr(messageSource, backButton, user.getLanguage()))) {
             sender.sendMessage(user, LOADING, KeyboardType.REMOVE);
             return showSendSettingsMenu(user);
         }

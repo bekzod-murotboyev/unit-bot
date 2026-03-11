@@ -10,19 +10,13 @@ spring:
     hibernate:
       ddl-auto: update
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      database: 0
-      repositories:
-        enabled: false
-
 bot:
   mode: development
   token: ${BOT_TOKEN:}
   domain: ${BOT_DOMAIN:}
   username: ${BOT_USERNAME:}
+  redis:
+    enabled: true
   properties:
     catch-mapper-exception: true
     show-unmapped-request-log: true

@@ -10,9 +10,11 @@ import io.github.reflectframework.unitbot.services.bot.RegisterService;
 import io.github.reflectframework.unitbot.utils.Constant;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 @BotController
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class RegisterController {
 
     private final RegisterService registerService;

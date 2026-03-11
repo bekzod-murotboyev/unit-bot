@@ -8,11 +8,13 @@ import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.bot.SearchService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import static io.github.reflectframework.unitbot.utils.Locale.SEARCH_MODE;
 
 @BotController
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class SearchController {
 
     private final SearchService service;

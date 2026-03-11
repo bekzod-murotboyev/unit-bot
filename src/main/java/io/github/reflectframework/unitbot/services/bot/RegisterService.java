@@ -7,6 +7,7 @@ import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import static io.github.reflectframework.unitbot.utils.Locale.*;
 
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class RegisterService {
 
     private final Sender sender;

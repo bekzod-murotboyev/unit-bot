@@ -9,12 +9,14 @@ import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.bot.SettingsService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import static io.github.reflectframework.unitbot.utils.Constant.BACK_TO_SETTINGS;
 import static io.github.reflectframework.unitbot.utils.Locale.*;
 
 @BotController
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class SettingsController {
 
     private final SettingsService settingsService;
