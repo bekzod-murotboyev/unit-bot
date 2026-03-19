@@ -18,13 +18,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 public class RegisterController {
 
     private final RegisterService registerService;
+
     @TextMapping(regexp = "/start", states = {State.Fields.INIT})
     public UserState showFirstStartMenu(HashedUser user) {
         return registerService.showFirstStartMenu(user);
     }
 
     @TextMapping(regexp = "/start")
-    public UserState savePhoneAndShowMainMenu(HashedUser user) {
+    public UserState handleStart(HashedUser user) {
         return registerService.showSendMainMenu(user);
     }
 

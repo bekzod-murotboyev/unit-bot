@@ -20,7 +20,9 @@ public class ExceptionController {
 
     @TextMapping(regexp = "[\\w.-]*")
     public UserState exceptionHandler(HashedUser user) {
-        sender.sendMessage(user, UNKNOWN_OPTION);
+        sender.sendMessage(user)
+                .text(UNKNOWN_OPTION)
+                .send();
         return user.getState();
     }
 
