@@ -2,18 +2,17 @@ package io.github.reflectframework.unitbot.services.bot;
 
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.util.enums.KeyboardType;
-import io.github.reflectframework.reflecttelegrambot.util.i18n.I18nUtils;
 import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 
 import static io.github.reflectframework.unitbot.utils.Constant.BACK_TO_MAIN_MENU;
@@ -27,7 +26,6 @@ import static io.github.reflectframework.unitbot.utils.Locale.LANGUAGE_EN;
 import static io.github.reflectframework.unitbot.utils.Locale.LANGUAGE_RU;
 import static io.github.reflectframework.unitbot.utils.Locale.LOADING;
 import static io.github.reflectframework.unitbot.utils.Locale.PHONE_BUTTON;
-import static io.github.reflectframework.unitbot.utils.Locale.WRONG_OPTION;
 
 @Service
 @RequiredArgsConstructor
@@ -43,20 +41,39 @@ public class SettingsService {
     private String backButton;
 
     public UserState showEditSettingsMenu(HashedUser user) {
-        sender.editMessageText(user, CHOOSE_ONE, List.of(List.of(CHANGE_PHONE, CHANGE_LANGUAGE),
-                List.of(BACK_TO_MAIN_MENU)));
+        sender.editMessageText(user)
+                .text(CHOOSE_ONE)
+                .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
+                .inlineKeyboardRow(InlineKeyboardButton.builder()
+                        .text(BACK_BUTTON)
+                        .callbackData(BACK_TO_MAIN_MENU)
+                        .build())
+                .send();
         return State.SETTINGS_MENU;
     }
 
 
     public UserState showSendSettingsMenu(HashedUser user) {
-        sender.sendMessage(user, CHOOSE_ONE, List.of(List.of(CHANGE_PHONE, CHANGE_LANGUAGE),
-                List.of(BACK_TO_MAIN_MENU)));
+        sender.sendMessage(user)
+                .text(CHOOSE_ONE)
+                .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
+                .inlineKeyboardRow(InlineKeyboardButton.builder()
+                        .text(BACK_BUTTON)
+                        .callbackData(BACK_TO_MAIN_MENU)
+                        .build())
+                .send();
         return State.SETTINGS_MENU;
     }
 
     public UserState showChangeLanguageMenu(HashedUser user) {
-        sender.editMessageText(user, CHOOSE_ONE, List.of(List.of(LANGUAGE_EN, LANGUAGE_RU), List.of(BACK_TO_SETTINGS)));
+        sender.editMessageText(user)
+                .text(CHOOSE_ONE)
+                .inlineKeyboardRow(LANGUAGE_EN, LANGUAGE_RU)
+                .inlineKeyboardRow(InlineKeyboardButton.builder()
+                        .text(BACK_BUTTON)
+                        .callbackData(BACK_TO_SETTINGS)
+                        .build())
+                .send();
         return State.CHANGE_LANGUAGE;
     }
 
@@ -90,12 +107,10 @@ public class SettingsService {
         return showSendSettingsMenu(user);
     }
 
-    public UserState backToSettingsMenuFromChangePhone(HashedUser user, String text) {
-        if (text.equals(I18nUtils.tr(messageSource, backButton, user.getLanguage()))) {
-            sender.sendMessage(user, LOADING, KeyboardType.REMOVE);
-            return showSendSettingsMenu(user);
-        }
-        sender.sendMessage(user, WRONG_OPTION);
-        return State.CHANGE_PHONE;
+    public UserState backToSettingsMenuFromChangePhone(HashedUser user) {
+        sender.sendMessage(user, LOADING)
+                .replyKeyboard(new ReplyKeyboardRemove(true))
+                .send();
+        return showSendSettingsMenu(user);
     }
 }

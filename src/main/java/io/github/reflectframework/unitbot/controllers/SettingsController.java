@@ -12,7 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import static io.github.reflectframework.unitbot.utils.Constant.BACK_TO_SETTINGS;
-import static io.github.reflectframework.unitbot.utils.Locale.*;
+import static io.github.reflectframework.unitbot.utils.Locale.BACK_BUTTON;
+import static io.github.reflectframework.unitbot.utils.Locale.CHANGE_LANGUAGE;
+import static io.github.reflectframework.unitbot.utils.Locale.CHANGE_PHONE;
+import static io.github.reflectframework.unitbot.utils.Locale.LANGUAGE_EN;
+import static io.github.reflectframework.unitbot.utils.Locale.LANGUAGE_RU;
+import static io.github.reflectframework.unitbot.utils.Locale.SETTINGS;
 
 @BotController
 @RequiredArgsConstructor
@@ -50,9 +55,10 @@ public class SettingsController {
     public UserState changeContactAndShowSettingsMenu(HashedUser user, String phone) {
         return settingsService.changeContactAndShowSettingsMenu(user, phone);
     }
-    @TextMapping(states = {State.Fields.CHANGE_PHONE, CHANGE_LANGUAGE})
-    public UserState backToSettingsMenuFromChangePhone(HashedUser user,String text) {
-        return settingsService.backToSettingsMenuFromChangePhone(user,text);
+
+    @TextMapping(regexp = BACK_BUTTON, translateRegexp = true, states = {State.Fields.CHANGE_PHONE, CHANGE_LANGUAGE})
+    public UserState backToSettingsMenuFromChangePhone(HashedUser user) {
+        return settingsService.backToSettingsMenuFromChangePhone(user);
     }
 
 }

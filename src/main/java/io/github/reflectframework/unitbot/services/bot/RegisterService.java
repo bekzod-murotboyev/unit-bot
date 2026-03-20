@@ -5,7 +5,6 @@ import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.State;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
@@ -59,7 +58,10 @@ public class RegisterService {
     }
 
     public UserState showEditMainMenu(HashedUser user) {
-        sender.editMessageText(user, CHOOSE_ONE, List.of(List.of(SEARCH_MODE, SETTINGS)));
+        sender.editMessageText(user)
+                .text(CHOOSE_ONE)
+                .inlineKeyboardRow(SEARCH_MODE, SETTINGS)
+                .send();
         return State.MAIN_MENU;
     }
 }

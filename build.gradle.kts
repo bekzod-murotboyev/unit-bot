@@ -28,7 +28,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("io.github.reflectframework:reflect-telegram-bot:1.6.3")
+    implementation("io.github.reflectframework:reflect-telegram-bot:1.6.4")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.21.1")
 
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")

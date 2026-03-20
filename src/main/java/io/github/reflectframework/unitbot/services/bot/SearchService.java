@@ -21,7 +21,7 @@ public class SearchService {
     private final SpotifyService spotifyService;
 
     public UserState showSearchModeMenu(HashedUser user) {
-        sender.editMessageText(user, SEARCH_MODE_TITLE);
+        sender.editMessageText(user, SEARCH_MODE_TITLE).send();
         return State.SEARCH_MODE_MENU;
     }
 
@@ -31,7 +31,7 @@ public class SearchService {
         if (searchResult != null) {
             sender.sendAudio(user, searchResult);
         } else {
-            sender.sendMessage(user, MP3_NOT_FOUND);
+            sender.sendMessage(user, MP3_NOT_FOUND).send();
         }
 
         return State.SEARCH_MODE_MENU;
