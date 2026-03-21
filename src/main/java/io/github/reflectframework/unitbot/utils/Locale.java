@@ -16,6 +16,7 @@ public interface Locale {
     String LANGUAGE_EN="language-en";
     String LANGUAGE_RU="language-ru";
     String PHONE_BUTTON="phone-button";
+    String LOCATION_BUTTON="location-button";
     String BACK_BUTTON="back-button";
     String WRONG_OPTION="wrong-option";
 }

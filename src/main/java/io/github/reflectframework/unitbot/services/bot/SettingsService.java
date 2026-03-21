@@ -78,7 +78,7 @@ public class SettingsService {
     }
 
     public UserState showChangePhoneMenu(HashedUser user) {
-        sender.deleteMessage(user);
+        sender.deleteMessage(user.getChatId(),user.getLastMessageId()).send();
         sender.sendMessage(user)
                 .text(CHANGE_PHONE_TITLE)
                 .keyboardRow(KeyboardButton

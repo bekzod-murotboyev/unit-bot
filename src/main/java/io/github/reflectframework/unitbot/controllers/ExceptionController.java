@@ -19,9 +19,9 @@ public class ExceptionController {
     private final Sender sender;
 
     @TextMapping(regexp = "[\\w.-]*")
-    public UserState exceptionHandler(HashedUser user) {
+    public UserState exceptionHandler(HashedUser user,String text) {
         sender.sendMessage(user)
-                .text(UNKNOWN_OPTION)
+                .text(UNKNOWN_OPTION,text)
                 .send();
         return user.getState();
     }
