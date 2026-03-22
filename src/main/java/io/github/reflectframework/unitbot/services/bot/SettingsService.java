@@ -6,13 +6,11 @@ import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 
 import static io.github.reflectframework.unitbot.utils.Constant.BACK_TO_MAIN_MENU;
@@ -35,19 +33,11 @@ public class SettingsService {
 
     private final Sender sender;
 
-    private final MessageSource messageSource;
-
-    @Value("${bot.i18.key.back-button}")
-    private String backButton;
-
     public UserState showEditSettingsMenu(HashedUser user) {
         sender.editMessageText(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
-                .inlineKeyboardRow(InlineKeyboardButton.builder()
-                        .text(BACK_BUTTON)
-                        .callbackData(BACK_TO_MAIN_MENU)
-                        .build())
+                .inlineKeyboardRow(Map.of(BACK_TO_MAIN_MENU, BACK_BUTTON))
                 .send();
         return State.SETTINGS_MENU;
     }
@@ -57,10 +47,7 @@ public class SettingsService {
         sender.sendMessage(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
-                .inlineKeyboardRow(InlineKeyboardButton.builder()
-                        .text(BACK_BUTTON)
-                        .callbackData(BACK_TO_MAIN_MENU)
-                        .build())
+                .inlineKeyboardRow(Map.of(BACK_TO_MAIN_MENU, BACK_BUTTON))
                 .send();
         return State.SETTINGS_MENU;
     }
@@ -69,16 +56,13 @@ public class SettingsService {
         sender.editMessageText(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(LANGUAGE_EN, LANGUAGE_RU)
-                .inlineKeyboardRow(InlineKeyboardButton.builder()
-                        .text(BACK_BUTTON)
-                        .callbackData(BACK_TO_SETTINGS)
-                        .build())
+                .inlineKeyboardRow(Map.of(BACK_TO_SETTINGS, BACK_BUTTON))
                 .send();
         return State.CHANGE_LANGUAGE;
     }
 
     public UserState showChangePhoneMenu(HashedUser user) {
-        sender.deleteMessage(user.getChatId(),user.getLastMessageId()).send();
+        sender.deleteMessage(user.getChatId(), user.getLastMessageId()).send();
         sender.sendMessage(user)
                 .text(CHANGE_PHONE_TITLE)
                 .keyboardRow(KeyboardButton
