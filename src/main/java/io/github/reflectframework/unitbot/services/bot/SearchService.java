@@ -2,7 +2,6 @@ package io.github.reflectframework.unitbot.services.bot;
 
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.SpotifyService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
@@ -20,20 +19,20 @@ public class SearchService {
     private final Sender sender;
     private final SpotifyService spotifyService;
 
-    public UserState showSearchModeMenu(HashedUser user) {
+    public String showSearchModeMenu(HashedUser user) {
         sender.editMessageText(user, SEARCH_MODE_TITLE).send();
-        return State.SEARCH_MODE_MENU;
+        return State.SEARCH_MODE_MENU.name();
     }
 
-    public UserState search(HashedUser user, String searchText) {
+    public String search(HashedUser user, String searchText) {
         String searchResult = spotifyService.search(searchText);
 
         if (searchResult != null) {
-            sender.sendAudio(user, searchResult);
+            sender.sendAudio(user.getChatId(), searchResult).send();
         } else {
             sender.sendMessage(user, MP3_NOT_FOUND).send();
         }
 
-        return State.SEARCH_MODE_MENU;
+        return State.SEARCH_MODE_MENU.name();
     }
 }

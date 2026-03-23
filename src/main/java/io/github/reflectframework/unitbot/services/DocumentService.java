@@ -5,13 +5,13 @@ import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
 import io.github.reflectframework.reflecttelegrambot.network.client.Reflector;
 import io.github.reflectframework.reflecttelegrambot.payload.media.Media;
 import io.github.reflectframework.reflecttelegrambot.service.mediagroup.MediaGroupQueue;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.utils.Locale;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Audio;
 import org.telegram.telegrambots.meta.api.objects.Document;
@@ -29,12 +29,13 @@ import org.telegram.telegrambots.meta.api.objects.photo.PhotoSize;
 
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression("'${bot.mode:none}' != 'none'")
 public class DocumentService {
 
     private final Sender sender;
     private final Reflector reflector;
 
-    public UserState handlePhoto(HashedUser user, PhotoSize photoSize) {
+    public String handlePhoto(HashedUser user, PhotoSize photoSize) {
         sender.sendPhoto(user)
                 .photo(photoSize.getFileId())
                 .caption(Locale.READY)
@@ -46,7 +47,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredPhoto(HashedUser user, PhotoSize photoSize) {
+    public String handleStoredPhoto(HashedUser user, PhotoSize photoSize) {
         byte[] file = reflector.getFile(photoSize.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();
@@ -60,7 +61,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleVideo(HashedUser user, Video video) {
+    public String handleVideo(HashedUser user, Video video) {
         sender.sendVideo(user)
                 .video(video.getFileId())
                 .caption(Locale.READY)
@@ -72,7 +73,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredVideo(HashedUser user, Video video) {
+    public String handleStoredVideo(HashedUser user, Video video) {
         byte[] file = reflector.getFile(video.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();
@@ -86,7 +87,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleVoice(HashedUser user, Voice voice) {
+    public String handleVoice(HashedUser user, Voice voice) {
         sender.sendVoice(user)
                 .voice(voice.getFileId())
                 .caption(Locale.READY)
@@ -98,7 +99,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredVoice(HashedUser user, Voice voice) {
+    public String handleStoredVoice(HashedUser user, Voice voice) {
         byte[] file = reflector.getFile(voice.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();
@@ -112,7 +113,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleAudio(HashedUser user, Audio audio) {
+    public String handleAudio(HashedUser user, Audio audio) {
         sender.sendAudio(user)
                 .audio(audio.getFileId())
                 .caption(Locale.READY)
@@ -124,7 +125,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredAudio(HashedUser user, Audio audio) {
+    public String handleStoredAudio(HashedUser user, Audio audio) {
         byte[] file = reflector.getFile(audio.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();
@@ -138,7 +139,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleDocument(HashedUser user, Document document) {
+    public String handleDocument(HashedUser user, Document document) {
         sender.sendDocument(user)
                 .document(document.getFileId())
                 .caption(Locale.READY)
@@ -150,7 +151,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredDocument(HashedUser user, Document document) {
+    public String handleStoredDocument(HashedUser user, Document document) {
         byte[] file = reflector.getFile(document.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();
@@ -164,7 +165,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleMediaGroup(HashedUser user, MediaGroupQueue queue) {
+    public String handleMediaGroup(HashedUser user, MediaGroupQueue queue) {
         sender.sendMediaGroup(user)
                 .medias(queue.takeAsList().stream().map(this::mediaOf).toList())
                 .caption(Locale.READY)
@@ -182,7 +183,7 @@ public class DocumentService {
         };
     }
 
-    public UserState handleStoredMediaGroup(HashedUser user, MediaGroupQueue queue) {
+    public String handleStoredMediaGroup(HashedUser user, MediaGroupQueue queue) {
         List<InputMedia> mediaList = new ArrayList<>();
         for (Media media : queue.takeAsList()) {
             switch (media.getType()) {
@@ -204,7 +205,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleAnimation(HashedUser user, Animation animation) {
+    public String handleAnimation(HashedUser user, Animation animation) {
         sender.sendAnimation(user)
                 .animation(animation.getFileId())
                 .caption(Locale.READY)
@@ -216,7 +217,7 @@ public class DocumentService {
         return user.getState();
     }
 
-    public UserState handleStoredAnimation(HashedUser user, Animation animation) {
+    public String handleStoredAnimation(HashedUser user, Animation animation) {
         byte[] file = reflector.getFile(animation.getFileId());
         if (file == null) {
             sender.sendMessage(user, Locale.WRONG_OPTION).send();

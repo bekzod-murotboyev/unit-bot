@@ -2,12 +2,12 @@ package io.github.reflectframework.unitbot.services.bot;
 
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.State;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 
@@ -27,18 +27,18 @@ public class RegisterService {
 
     private final UserService userService;
 
-    public UserState showFirstStartMenu(HashedUser user) {
-        sender.sendMessage(user)
+    public String showFirstStartMenu(HashedUser user) {
+        Message send = sender.sendMessage(user)
                 .text(CHANGE_PHONE_TITLE)
                 .keyboardRow(KeyboardButton.builder()
                         .text(PHONE_BUTTON)
                         .requestContact(true)
                         .build())
                 .send();
-        return State.SEND_PHONE;
+        return State.SEND_PHONE.name();
     }
 
-    public UserState savePhoneAndShowMainMenu(HashedUser user, String phoneNumber) {
+    public String savePhoneAndShowMainMenu(HashedUser user, String phoneNumber) {
         userService.updatePhone(user, phoneNumber);
         sender.sendMessage(user, READY)
                 .replyKeyboard(new ReplyKeyboardRemove(true))
@@ -46,22 +46,22 @@ public class RegisterService {
         sender.sendMessage(user, CHOOSE_ONE)
                 .inlineKeyboardRow(SEARCH_MODE, SETTINGS)
                 .send();
-        return State.MAIN_MENU;
+        return State.MAIN_MENU.name();
     }
 
-    public UserState showSendMainMenu(HashedUser user) {
+    public String showSendMainMenu(HashedUser user) {
         sender.sendMessage(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(SEARCH_MODE, SETTINGS)
                 .send();
-        return State.MAIN_MENU;
+        return State.MAIN_MENU.name();
     }
 
-    public UserState showEditMainMenu(HashedUser user) {
+    public String showEditMainMenu(HashedUser user) {
         sender.editMessageText(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(SEARCH_MODE, SETTINGS)
                 .send();
-        return State.MAIN_MENU;
+        return State.MAIN_MENU.name();
     }
 }

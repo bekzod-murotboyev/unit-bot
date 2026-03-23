@@ -1,13 +1,18 @@
 package io.github.reflectframework.unitbot.entities;
 
 import io.github.reflectframework.reflecttelegrambot.entity.user.TelegramUserDetails;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserLanguage;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,13 +60,13 @@ public class UserEntity implements TelegramUserDetails {
 
     @Nonnull
     @Override
-    public UserState getState() {
-        return state;
+    public String getState() {
+        return state.name();
     }
 
     @Nullable
     @Override
-    public UserLanguage getLanguage() {
-        return language;
+    public String getLanguageCode() {
+        return language.getCode();
     }
 }

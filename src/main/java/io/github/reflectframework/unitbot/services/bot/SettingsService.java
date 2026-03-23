@@ -2,7 +2,6 @@ package io.github.reflectframework.unitbot.services.bot;
 
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import io.github.reflectframework.unitbot.services.UserService;
 import io.github.reflectframework.unitbot.utils.Language;
 import io.github.reflectframework.unitbot.utils.State;
@@ -33,35 +32,35 @@ public class SettingsService {
 
     private final Sender sender;
 
-    public UserState showEditSettingsMenu(HashedUser user) {
+    public String showEditSettingsMenu(HashedUser user) {
         sender.editMessageText(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
                 .inlineKeyboardRow(Map.of(BACK_TO_MAIN_MENU, BACK_BUTTON))
                 .send();
-        return State.SETTINGS_MENU;
+        return State.SETTINGS_MENU.name();
     }
 
 
-    public UserState showSendSettingsMenu(HashedUser user) {
+    public String showSendSettingsMenu(HashedUser user) {
         sender.sendMessage(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(CHANGE_PHONE, CHANGE_LANGUAGE)
                 .inlineKeyboardRow(Map.of(BACK_TO_MAIN_MENU, BACK_BUTTON))
                 .send();
-        return State.SETTINGS_MENU;
+        return State.SETTINGS_MENU.name();
     }
 
-    public UserState showChangeLanguageMenu(HashedUser user) {
+    public String showChangeLanguageMenu(HashedUser user) {
         sender.editMessageText(user)
                 .text(CHOOSE_ONE)
                 .inlineKeyboardRow(LANGUAGE_EN, LANGUAGE_RU)
                 .inlineKeyboardRow(Map.of(BACK_TO_SETTINGS, BACK_BUTTON))
                 .send();
-        return State.CHANGE_LANGUAGE;
+        return State.CHANGE_LANGUAGE.name();
     }
 
-    public UserState showChangePhoneMenu(HashedUser user) {
+    public String showChangePhoneMenu(HashedUser user) {
         sender.deleteMessage(user.getChatId(), user.getLastMessageId()).send();
         sender.sendMessage(user)
                 .text(CHANGE_PHONE_TITLE)
@@ -74,10 +73,10 @@ public class SettingsService {
                 .oneTimeKeyboard(true)
                 .resizeKeyboard(true)
                 .send();
-        return State.CHANGE_PHONE;
+        return State.CHANGE_PHONE.name();
     }
 
-    public UserState changeLanguage(HashedUser user, String data) {
+    public String changeLanguage(HashedUser user, String data) {
         switch (data) {
             case LANGUAGE_EN -> userService.updateLanguage(user, Language.EN);
             case LANGUAGE_RU -> userService.updateLanguage(user, Language.RU);
@@ -86,12 +85,12 @@ public class SettingsService {
         return showEditSettingsMenu(user);
     }
 
-    public UserState changeContactAndShowSettingsMenu(HashedUser user, String phone) {
+    public String changeContactAndShowSettingsMenu(HashedUser user, String phone) {
         userService.updatePhone(user, phone);
         return showSendSettingsMenu(user);
     }
 
-    public UserState backToSettingsMenuFromChangePhone(HashedUser user) {
+    public String backToSettingsMenuFromChangePhone(HashedUser user) {
         sender.sendMessage(user, LOADING)
                 .replyKeyboard(new ReplyKeyboardRemove(true))
                 .send();

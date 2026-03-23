@@ -36,11 +36,9 @@ public class UserService implements TelegramUserDetailsService {
     @Override
     public void update(@Nonnull HashedUser user) {
         UserEntity entity = userRepository.findByChatId(user.getChatId());
-        if (user.getState() instanceof State state && user.getLanguage() instanceof Language language) {
-            entity.setState(state);
-            entity.setLanguage(language);
-            userRepository.save(entity);
-        }
+        entity.setState(State.valueOf(user.getState()));
+        entity.setLanguage(Language.of(user.getLanguageCode()));
+        userRepository.save(entity);
     }
 
     public void updatePhone(HashedUser user, String phoneNumber) {
@@ -51,7 +49,7 @@ public class UserService implements TelegramUserDetailsService {
 
     public void updateLanguage(HashedUser user, Language language) {
         UserEntity userEntity = userRepository.findByChatId(user.getChatId());
-        user.setLanguage(language);
+        user.setLanguageCode(language.getCode());
         userEntity.setLanguage(language);
         userRepository.save(userEntity);
     }

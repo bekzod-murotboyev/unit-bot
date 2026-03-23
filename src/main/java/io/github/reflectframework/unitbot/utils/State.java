@@ -1,10 +1,9 @@
 package io.github.reflectframework.unitbot.utils;
 
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import lombok.experimental.FieldNameConstants;
 
 @FieldNameConstants(onlyExplicitlyIncluded = true)
-public enum State implements UserState {
+public enum State {
     @FieldNameConstants.Include INIT,
     @FieldNameConstants.Include SEND_PHONE,
     @FieldNameConstants.Include MAIN_MENU,

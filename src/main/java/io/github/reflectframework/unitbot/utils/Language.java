@@ -1,20 +1,22 @@
 package io.github.reflectframework.unitbot.utils;
 
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserLanguage;
+import jakarta.annotation.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public enum Language implements UserLanguage {
+@Getter
+@AllArgsConstructor
+public enum Language {
     EN("en"),
     RU("ru");
-
-
     private final String code;
 
-    Language(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String getCode() {
-        return code;
+    public static Language of(@Nullable String code) {
+        for (Language language : Language.values()) {
+            if (language.code.equals(code)) {
+                return language;
+            }
+        }
+        throw new IllegalArgumentException("Language not found: " + code);
     }
 }

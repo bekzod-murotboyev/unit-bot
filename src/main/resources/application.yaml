@@ -15,18 +15,12 @@ bot:
   token: ${BOT_TOKEN:}
   domain: ${BOT_DOMAIN:}
   username: ${BOT_USERNAME:}
+  i18n: on
   redis:
     enabled: true
   properties:
     catch-mapper-exception: true
     show-unmapped-request-log: true
-  i18:
-    enabled: true
-    key:
-      back-button: back-button
-      contact-button: phone-button
-      location-button: location-button
-      back-button-prefix: BACK_
 
 
 spotify:

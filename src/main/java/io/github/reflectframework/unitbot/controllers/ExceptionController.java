@@ -5,7 +5,6 @@ import io.github.reflectframework.reflecttelegrambot.annotation.BotController;
 import io.github.reflectframework.reflecttelegrambot.annotation.mapping.TextMapping;
 import io.github.reflectframework.reflecttelegrambot.component.sender.Sender;
 import io.github.reflectframework.reflecttelegrambot.entity.user.HashedUser;
-import io.github.reflectframework.reflecttelegrambot.util.marker.UserState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
@@ -19,9 +18,9 @@ public class ExceptionController {
     private final Sender sender;
 
     @TextMapping(regexp = "[\\w.-]*")
-    public UserState exceptionHandler(HashedUser user,String text) {
+    public String exceptionHandler(HashedUser user, String text) {
         sender.sendMessage(user)
-                .text(UNKNOWN_OPTION,text)
+                .text(UNKNOWN_OPTION, text)
                 .send();
         return user.getState();
     }
